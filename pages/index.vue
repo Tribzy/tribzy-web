@@ -1,0 +1,372 @@
+<template>
+    <main class="page-index">
+        <!-- HERO SECTION -->
+        <section class="page-index__hero">
+            <div class="page-index__hero-content">
+                <h1>
+                    <!-- Find Your Tribe
+                    Easily With Tribzy -->
+                    Find your Tribe
+                    Easily with Tribzy
+                </h1>
+                <div class="page-index__hero-content-text">
+                    Find the perfect place to live and connect with like minded people.
+                </div>
+                <CustomButton @click="scrollToHowItWorks()">Get Started</CustomButton>
+            </div>
+            <div class="page-index__hero-image">
+                <img src="@/assets/images/hero-new.webp" alt="Hero Image for Tribzy" />
+            </div>
+        </section>
+
+        <!-- How it works -->
+        <section id="how-it-works" class="page-index__how-it-works">
+
+            <h2>How It Works</h2>
+            <p>Easily find your Home, Community, and Friends with Tribzy</p>
+
+            <div class="page-index__how-it-works-tiles">
+                <div v-for="item in howItWorks" :key="item.id" class="page-index__how-it-works-tile-item">
+                    <div class="page-index__how-it-works-tile-item-img">
+                        <img :src="getHowItWorksImageUrl(item.url)" :alt="item.name" />
+                    </div>
+                    <p class="page-index__how-it-works-tile-item-text">{{ item.name }}</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section id="features" class="page-index__features">
+
+            <h2>Features</h2>
+            <p>Discover the key features that make Tribzy your ultimate housing solution</p>
+
+            <div class="page-index__features-cards">
+                <div v-for="item in features" :key="item.id" class="page-index__features-card-item">
+                    <div class="page-index__features-card-item-img">
+                        <img :src="getFeaturesImageUrl(item.img_url_path)" :alt="item.title" />
+                    </div>
+                    <p class="title">{{ item.title }}</p>
+                    <ul class="points">
+                        <li v-for="point in item.points">{{ point }}</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Join us -->
+        <section id="join-us" class="page-index__join-us">
+            <div class="page-index__join-us-img">
+                <img src="@/assets/images/join-us.webp" alt="Join US Image">
+            </div>
+            <div class="page-index__join-us-content">
+                <h1>Ready to Join Our Tribe?</h1>
+                <p>Join Tribzy Today and Start Your Journey to find the <span>Perfect Community.</span></p>
+                <CustomButton>Join now</CustomButton>
+            </div>
+        </section>
+    </main>
+</template>
+
+<script lang="ts" setup>
+import { communititesData, features, howItWorks } from '~/types';
+
+const router = useRouter();
+
+const goToCommunitiesListPage = () => {
+    router.push("/communities")
+}
+
+const getHowItWorksImageUrl = (url: string) => getLocalDynamicImageUrl("images/how-it-works", url + '.webp')
+
+const getFeaturesImageUrl = (url: string) => getLocalDynamicImageUrl("images/features", url + '.svg')
+
+const scrollToHowItWorks = () => {
+    const section = document.querySelector("#how-it-works");
+    if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+</script>
+
+<style lang="scss">
+@use '@/assets/scss/abstracts/index.scss' as *;
+
+.page-index {
+    padding: 0;
+
+    &__hero {
+        // background-color: $color-primary-bg;
+        // background-color: $color-primary-bg;
+        padding-left: $padding;
+
+        min-height: calc(100vh - $header-height);
+
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+
+        p {
+            font-size: 1.25rem;
+            font-weight: 600;
+            text-align: center;
+
+            br {
+                display: none;
+            }
+
+            @include min-tablet {
+                br {
+                    display: block;
+                }
+            }
+        }
+
+        @include min-tablet {
+            padding-left: $padding-desktop;
+            flex-direction: row;
+        }
+    }
+
+    &__hero-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: $padding * 2.5;
+
+        .custom-button {
+            min-width: 12rem;
+        }
+
+        @include min-tablet {
+            align-items: flex-start;
+            flex: 1;
+        }
+    }
+
+    &__hero-content-text {
+        font-size: 1.5rem;
+        text-align: center;
+        color: $color-dark-grey;
+
+        @include min-tablet {
+            text-align: left;
+        }
+    }
+
+    &__hero-image {
+        min-width: 10rem;
+        max-width: 30rem;
+        // width: 50rem;
+        margin: 0 1rem;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0.5rem 0 0 0.5rem;
+        }
+
+        @include tablet {
+            min-width: 20rem;
+            max-width: 40rem;
+        }
+
+        @include desktop {
+            min-width: 20rem;
+            max-width: 50rem;
+        }
+    }
+
+    &__how-it-works,
+    &__features {
+        background-color: $color-primary-bg;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        padding: $padding-desktop $padding * 4;
+
+        p {
+            color: $color-dark-grey;
+        }
+    }
+
+    // &__how-it-works-tiles,
+    // &__features-cards {
+    &__how-it-works-tiles {
+        margin-top: $padding * 3;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 2rem;
+
+        @include min-tablet {
+            flex-direction: row;
+        }
+    }
+
+    &__how-it-works-tile-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: $padding;
+
+        &-img {
+            height: 12rem;
+            max-height: 20rem;
+
+            img {
+                height: 100%;
+                width: 100%;
+                object-fit: contain;
+                width: auto;
+            }
+        }
+
+
+        &-text {
+            font-size: 1.25rem;
+            // font-weight: 500;
+            color: $color-black !important;
+        }
+    }
+
+    &__features {
+        background: transparent;
+    }
+
+    &__features-cards {
+        margin-top: $padding * 2;
+        display: grid;
+        grid-template-columns: 1fr;
+        column-gap: 1rem;
+
+        @include min-tablet {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+    }
+
+    &__features-card-item {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: $padding;
+        box-shadow: 0px 4px 12px 0px #00000014;
+        text-align: left;
+        padding: 2rem;
+
+        border-radius: $padding;
+
+        border: 1px solid transparent;
+        transition: all 0.3s;
+
+        min-width: 13rem;
+
+        .title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: $color-black;
+        }
+
+        .points {
+            color: $color-dark-grey;
+        }
+
+        &:hover {
+            border: 1px solid $color-primary;
+            cursor: default;
+            transform: scale(1.01);
+            box-shadow: 0px 4px 12px 0px $color-primary-bg;
+
+            // background-color: $color-primary;
+
+            // .title,
+            // .points {
+            //     color: $color-white !important;
+            // }
+
+            // img {
+            //     color: $color-white;
+            // }
+        }
+    }
+
+    &__join-us {
+        padding-top: 0 !important;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5rem;
+
+        @include min-tablet {
+            flex-direction: row;
+        }
+    }
+
+    &__join-us-img {
+        max-width: 36rem;
+
+        img {
+            height: 100%;
+            width: 100%;
+
+        }
+    }
+
+    &__join-us-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+
+        p {
+            color: $color-dark-grey;
+            text-align: center;
+        }
+
+        .custom-button {
+            min-width: 15rem;
+        }
+
+        @include min-tablet {
+            align-items: flex-start;
+
+            p {
+                text-align: left;
+            }
+        }
+    }
+}
+
+
+
+h1 {
+    @include min-tablet {
+        font-size: 3rem;
+        text-align: left;
+    }
+}
+
+h2 {
+    @include min-tablet {
+        font-size: 2.5rem;
+    }
+}
+
+#how-it-works,
+#features,
+#join-us {
+    padding: $padding * 2 $padding;
+
+    @include min-tablet {
+        padding: $padding * 4 $padding-desktop;
+    }
+}
+</style>
