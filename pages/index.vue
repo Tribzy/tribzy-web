@@ -62,7 +62,11 @@
             <div class="page-index__join-us-content">
                 <h1>Ready to Join Our Tribe?</h1>
                 <p>Join Tribzy Today and Start Your Journey to find the <span>Perfect Community.</span></p>
-                <CustomButton>Join now</CustomButton>
+                <div class="page-index__join-us-form">
+                    <CustomInput v-model:value="email" type="email" placeholder="Enter your email"
+                        :error="isEmailWrong ? 'Please enter a valid email' : undefined" />
+                    <CustomButton>Join waitlist</CustomButton>
+                </div>
             </div>
         </section>
     </main>
@@ -87,6 +91,20 @@ const scrollToHowItWorks = () => {
         section.scrollIntoView({ behavior: 'smooth' });
     }
 }
+
+const email = ref<string>("");
+
+const isEmailWrong = ref<boolean>(false);
+
+watch(email, (newVal) => {
+    if (!newVal) {
+        isEmailWrong.value = false;
+        return;
+    }
+    // regex for email validation
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    isEmailWrong.value = !emailRegex.test(newVal);
+})
 
 </script>
 
@@ -332,7 +350,7 @@ const scrollToHowItWorks = () => {
         }
 
         .custom-button {
-            min-width: 15rem;
+            // min-width: 15rem;
         }
 
         @include min-tablet {
@@ -341,6 +359,17 @@ const scrollToHowItWorks = () => {
             p {
                 text-align: left;
             }
+        }
+    }
+
+    &__join-us-form {
+        display: flex;
+        gap: 1rem;
+        max-height: 2.5rem;
+        width: 100%;
+
+        .custom-input {
+            flex: 1;
         }
     }
 }
