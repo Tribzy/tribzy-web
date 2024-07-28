@@ -349,9 +349,9 @@ watch(email, (newVal) => {
             text-align: center;
         }
 
-        .custom-button {
-            // min-width: 15rem;
-        }
+        // .custom-button {
+        // min-width: 15rem;
+        // }
 
         @include min-tablet {
             align-items: flex-start;
