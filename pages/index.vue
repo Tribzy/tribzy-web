@@ -62,7 +62,16 @@
             <div class="page-index__join-us-content">
                 <h1>Ready to Join Our Tribe?</h1>
                 <p>Join Tribzy Today and Start Your Journey to find the <span>Perfect Community.</span></p>
-                <CustomButton>Join now</CustomButton>
+                <div v-if="!rootStore.formSubmitted" class="page-index__join-us-form">
+                    <CustomInput v-model:value="email" type="email" placeholder="Enter your email"
+                        :error="isEmailWrong ? 'Please enter a valid email' : undefined" />
+                    <CustomButton @click="joinWaitlist()">Join waitlist</CustomButton>
+                </div>
+                <div v-else class="page-index__join-us-form-success-text">
+                    🎉🎉🎉
+                    <br>
+                    You have successfully joined the waitlist. We will notify you once we are ready to launch.
+                </div>
             </div>
         </section>
     </main>
@@ -72,6 +81,8 @@
 import { communititesData, features, howItWorks } from '~/types';
 
 const router = useRouter();
+
+const rootStore = useRootStore();
 
 const goToCommunitiesListPage = () => {
     router.push("/communities")
@@ -87,6 +98,55 @@ const scrollToHowItWorks = () => {
         section.scrollIntoView({ behavior: 'smooth' });
     }
 }
+
+const email = ref<string>("");
+
+const isEmailWrong = ref<boolean>(false);
+
+watch(email, (newVal) => {
+    if (!newVal) {
+        isEmailWrong.value = false;
+        return;
+    }
+    // regex for email validation
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    isEmailWrong.value = !emailRegex.test(newVal);
+})
+
+const joinWaitlist = async () => {
+    if (!email.value || isEmailWrong.value) {
+        return;
+    }
+
+    try {
+        const data = await $fetch('/api/subscribe', {
+            method: 'POST',
+            body: {
+                email: email.value,
+            },
+        })
+        console.log('Success:', data)
+
+        rootStore.setFormSubmitted(true);
+    } catch (error) {
+        console.error('Error:', error)
+    }
+}
+
+// const getSubscribersList = async () => {
+//     try {
+//         const data = await $fetch('/api/subscribers', {
+//             method: 'GET',
+//         })
+//         console.log('Success:', data)
+//     } catch (error) {
+//         console.error('Error:', error)
+//     }
+// }
+
+// onMounted(() => {
+//     getSubscribersList();
+// })
 
 </script>
 
@@ -316,7 +376,6 @@ const scrollToHowItWorks = () => {
         img {
             height: 100%;
             width: 100%;
-
         }
     }
 
@@ -331,9 +390,9 @@ const scrollToHowItWorks = () => {
             text-align: center;
         }
 
-        .custom-button {
-            min-width: 15rem;
-        }
+        // .custom-button {
+        // min-width: 15rem;
+        // }
 
         @include min-tablet {
             align-items: flex-start;
@@ -341,6 +400,26 @@ const scrollToHowItWorks = () => {
             p {
                 text-align: left;
             }
+        }
+    }
+
+    &__join-us-form {
+        display: flex;
+        gap: 1rem;
+        max-height: 2.5rem;
+        width: 100%;
+
+        .custom-input {
+            flex: 1;
+        }
+    }
+
+    &__join-us-form-success-text {
+        color: $color-green !important;
+        text-align: center;
+
+        @include min-tablet {
+            text-align: left;
         }
     }
 }
