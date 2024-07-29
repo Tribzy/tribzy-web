@@ -64,7 +64,7 @@
                 <p>Join Tribzy Today and Start Your Journey to find the <span>Perfect Community.</span></p>
                 <div v-if="!rootStore.formSubmitted && !isLoading" class="page-index__join-us-form">
                     <CustomInput v-model:value="email" type="email" placeholder="Enter your email"
-                        :error="isEmailWrong ? 'Please enter a valid email' : undefined" />
+                        :error="isEmailWrong ? 'Please enter a valid email' : undefined" @keydown="joinWaitlist()" />
                     <CustomButton @click="joinWaitlist()">Join waitlist</CustomButton>
                 </div>
                 <div v-else-if="isLoading" class="loader">

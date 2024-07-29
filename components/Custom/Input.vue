@@ -4,7 +4,8 @@
             {{ label ?? placeholder }}
         </label>
         <input v-model="value" id="custom-input__inner" class="custom-input__inner" :class="{ 'is-error': error }"
-            :placeholder="placeholder" :type="type" @focus="isFocused = true" @blur="isFocused = false" />
+            :placeholder="placeholder" :type="type" @focus="isFocused = true" @blur="isFocused = false"
+            @keypress.enter="$emit('keydown', $event)" />
         <p v-if="error" class="custom-input__error">{{ error }}</p>
     </div>
 </template>
@@ -19,7 +20,7 @@ const value = defineModel('value', {
 
 const isFocused = ref(false);
 
-const props = defineProps({
+defineProps({
     label: {
         type: String,
         default: undefined,
@@ -37,6 +38,9 @@ const props = defineProps({
         default: 'text'
     },
 });
+
+const emits = defineEmits(['keydown']);
+
 </script>
 
 <style lang="scss">
