@@ -5,6 +5,14 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
   compatibilityDate: '2024-04-03',
 
+  // nitro: {
+  //   plugins: ["~/server/index.ts"],
+  // },
+
+  runtimeConfig: {
+    mongoDbUri: process.env.MONGODB_URI,
+  },
+
   app: {
     head: {
       charset: 'utf-8',

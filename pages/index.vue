@@ -62,10 +62,15 @@
             <div class="page-index__join-us-content">
                 <h1>Ready to Join Our Tribe?</h1>
                 <p>Join Tribzy Today and Start Your Journey to find the <span>Perfect Community.</span></p>
-                <div class="page-index__join-us-form">
+                <div v-if="!rootStore.formSubmitted" class="page-index__join-us-form">
                     <CustomInput v-model:value="email" type="email" placeholder="Enter your email"
                         :error="isEmailWrong ? 'Please enter a valid email' : undefined" />
-                    <CustomButton>Join waitlist</CustomButton>
+                    <CustomButton @click="joinWaitlist()">Join waitlist</CustomButton>
+                </div>
+                <div v-else class="page-index__join-us-form-success-text">
+                    🎉🎉🎉
+                    <br>
+                    You have successfully joined the waitlist. We will notify you once we are ready to launch.
                 </div>
             </div>
         </section>
@@ -76,6 +81,8 @@
 import { communititesData, features, howItWorks } from '~/types';
 
 const router = useRouter();
+
+const rootStore = useRootStore();
 
 const goToCommunitiesListPage = () => {
     router.push("/communities")
@@ -105,6 +112,41 @@ watch(email, (newVal) => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     isEmailWrong.value = !emailRegex.test(newVal);
 })
+
+const joinWaitlist = async () => {
+    if (!email.value || isEmailWrong.value) {
+        return;
+    }
+
+    try {
+        const data = await $fetch('/api/subscribe', {
+            method: 'POST',
+            body: {
+                email: email.value,
+            },
+        })
+        console.log('Success:', data)
+
+        rootStore.setFormSubmitted(true);
+    } catch (error) {
+        console.error('Error:', error)
+    }
+}
+
+// const getSubscribersList = async () => {
+//     try {
+//         const data = await $fetch('/api/subscribers', {
+//             method: 'GET',
+//         })
+//         console.log('Success:', data)
+//     } catch (error) {
+//         console.error('Error:', error)
+//     }
+// }
+
+// onMounted(() => {
+//     getSubscribersList();
+// })
 
 </script>
 
@@ -334,7 +376,6 @@ watch(email, (newVal) => {
         img {
             height: 100%;
             width: 100%;
-
         }
     }
 
@@ -370,6 +411,15 @@ watch(email, (newVal) => {
 
         .custom-input {
             flex: 1;
+        }
+    }
+
+    &__join-us-form-success-text {
+        color: $color-green !important;
+        text-align: center;
+
+        @include min-tablet {
+            text-align: left;
         }
     }
 }
