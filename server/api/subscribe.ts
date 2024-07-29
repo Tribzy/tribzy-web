@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
     try {
         await mongoose.connect(config.mongoDbUri);
 
-        console.log('Connected to MongoDB', config.mongoDbUri);
+        console.log('Connected to MongoDB');
 
     } catch (error) {
         console.error('Error connecting to MongoDB:', error);
@@ -31,6 +31,7 @@ export default defineEventHandler(async (event) => {
         return {
             success: false,
             message: 'Subscription failed!',
+            data: error,
         };
     } finally {
         await mongoose.disconnect();

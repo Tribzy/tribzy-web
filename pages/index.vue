@@ -62,15 +62,22 @@
             <div class="page-index__join-us-content">
                 <h1>Ready to Join Our Tribe?</h1>
                 <p>Join Tribzy Today and Start Your Journey to find the <span>Perfect Community.</span></p>
-                <div v-if="!rootStore.formSubmitted" class="page-index__join-us-form">
+                <div v-if="!rootStore.formSubmitted && !isLoading" class="page-index__join-us-form">
                     <CustomInput v-model:value="email" type="email" placeholder="Enter your email"
                         :error="isEmailWrong ? 'Please enter a valid email' : undefined" />
                     <CustomButton @click="joinWaitlist()">Join waitlist</CustomButton>
                 </div>
-                <div v-else class="page-index__join-us-form-success-text">
-                    🎉🎉🎉
-                    <br>
-                    You have successfully joined the waitlist. We will notify you once we are ready to launch.
+                <div v-else-if="isLoading" class="loader">
+                </div>
+                <div v-else-if="rootStore.formSubmitted && !isLoading" class="page-index__join-us-form-success-text">
+                    <span v-if="responseString && responseString?.trim() !== ''">
+                        {{ responseString }}
+                    </span>
+                    <span v-else>
+                        🎉🎉🎉
+                        <br>
+                        You have successfully joined the waitlist. We will notify you once we are ready to launch.
+                    </span>
                 </div>
             </div>
         </section>
@@ -83,6 +90,10 @@ import { communititesData, features, howItWorks } from '~/types';
 const router = useRouter();
 
 const rootStore = useRootStore();
+
+const isLoading = ref<boolean>(false);
+
+const responseString = ref<string>();
 
 const goToCommunitiesListPage = () => {
     router.push("/communities")
@@ -119,19 +130,32 @@ const joinWaitlist = async () => {
     }
 
     try {
-        const data = await $fetch('/api/subscribe', {
+
+        isLoading.value = true;
+
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+
+        const res = await $fetch('/api/subscribe', {
             method: 'POST',
             body: {
                 email: email.value,
             },
         })
 
-        const config = useRuntimeConfig();
+        isLoading.value = false;
 
-        console.log('Connected to MongoDB', config.mongoDbUri);
-        console.log('Success:', data)
+        console.log("res: ", res)
+
+        if (!res.success) {
+            if ((res as any).data.errorResponse.code === 11000) {
+                responseString.value = "🚨 You have already joined the waitlist.";
+            } else {
+                responseString.value = "🚨 Something went wrong. Please try again later or drop an email at tribzyco@gmail.com";
+            }
+        }
 
         rootStore.setFormSubmitted(true);
+
     } catch (error) {
         console.error('Error:', error)
     }
@@ -450,6 +474,32 @@ h2 {
 
     @include min-tablet {
         padding: $padding * 4 $padding-desktop;
+    }
+}
+
+$loader-size: 5rem;
+
+.loader {
+    min-height: $loader-size;
+    min-width: $loader-size;
+    width: $loader-size;
+    height: $loader-size;
+    border-radius: 50%;
+
+    border: 0.5rem solid $color-primary-bg;
+    border-top: 0.5rem solid $color-primary;
+
+    animation: spin 2s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
     }
 }
 </style>
