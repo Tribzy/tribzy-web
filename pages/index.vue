@@ -125,6 +125,10 @@ const joinWaitlist = async () => {
                 email: email.value,
             },
         })
+
+        const config = useRuntimeConfig();
+
+        console.log('Connected to MongoDB', config.mongoDbUri);
         console.log('Success:', data)
 
         rootStore.setFormSubmitted(true);
