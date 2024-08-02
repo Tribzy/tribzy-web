@@ -1,26 +1,42 @@
 <template>
     <main class="page-communities">
-        <h1>We are coming soon...</h1>
-        <CustomButton @click="goBack()">Go Back</CustomButton>
+        <h1>Communities</h1>
+
+        <div class="communities-list">
+            <CommunityCard v-for="community in communititesData" :key="community.id" :item="community" />
+        </div>
     </main>
 </template>
 
 <script lang="ts" setup>
-const router = useRouter();
+import { communititesData } from '~/types';
 
-const goBack = () => {
-    router.go(-1);
-}
-
-onBeforeMount(() => {
-    router.replace('/work-in-progress')
-})
 </script>
 
 <style lang="scss">
+@use '@/assets/scss/abstracts/index.scss' as *;
+
 .page-communities {
-    gap: 2rem;
-    text-align: center;
-    padding-top: 3rem;
+    padding: 1rem;
+
+    h1 {
+        margin-bottom: 1rem;
+    }
+
+    @include min-tablet {
+        padding: calc($padding-desktop/2) $padding-desktop;
+    }
+}
+
+.communities-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    @include min-tablet {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+    }
 }
 </style>
