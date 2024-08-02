@@ -1,11 +1,13 @@
 <template>
     <main class="page-community">
-        <h1>Bus Numbers</h1>
+        <h2>Bus Numbers</h2>
         <div class="bus-number-card">
-            <CustomIcon icon="BusStop" :size="160" color="primary-bg" />
-            12, 37
-            <br>
-            to the campus
+            <CustomIcon icon="BusStop" :size="160" color="primary-2" />
+            <p class="bus-number-card__details">
+                <b>12, 37</b>
+                <br />
+                <span>to the campus</span>
+            </p>
         </div>
     </main>
 </template>
@@ -45,5 +47,15 @@
 
     display: flex;
     align-items: center;
+
+    box-shadow: 0px 4px 12px 0px #00000014;
+}
+
+.bus-number-card__details {
+    font-size: 2rem;
+
+    span {
+        color: $color-grey-2;
+    }
 }
 </style>
