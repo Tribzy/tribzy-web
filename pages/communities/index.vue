@@ -43,7 +43,7 @@ import { communitiesData } from '~/types/communitites';
 
     @include desktop {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
         // flex-direction: row;
         // flex-wrap: wrap;
         // gap: 1.5rem;
