@@ -1,5 +1,4 @@
-export interface Community {
-    id: number;
+export interface SingleCommunity {
     name: string;
     image_url: string;
     amenities: string[];
@@ -26,8 +25,7 @@ export interface BusNumber {
     destination: string;
 }
 
-export const community: Community = {
-    id: 1,
+export const community: SingleCommunity = {
     name: "BLVD",
     image_url: "https://www.swamprentals.com/uploads/images/IMG_4254.jpg",
     amenities: [
@@ -51,7 +49,7 @@ export const community: Community = {
             type: "4 BR/3 BA - Platinum - Shared",
             bedrooms: 4,
             bathrooms: 3,
-            sq_ft: 0
+            sq_ft: 0,
         },
         {
             id: 2,
@@ -59,7 +57,7 @@ export const community: Community = {
             type: "4 BR/3 BA - Gold - Shared",
             bedrooms: 4,
             bathrooms: 3,
-            sq_ft: 0
+            sq_ft: 0,
         }
     ],
     community_surroundings: {
@@ -67,16 +65,16 @@ export const community: Community = {
         "Gainesville Airport": "4.6 Miles",
         "India Bazar": "0.9 Miles",
         "Walmart": "1.2 Miles",
-        "Best Buy": "0.8 Miles"
+        "Best Buy": "0.8 Miles",
     },
     bus_numbers: [
         {
             route: "12",
-            destination: "to the campus"
+            destination: "to the campus",
         },
         {
             route: "37",
-            destination: "to the campus"
+            destination: "to the campus",
         }
     ]
 };

@@ -9,7 +9,7 @@
             <!-- <p class="community-card__info-address">{{ item.address }}</p> -->
             <p class="community-card__info-away">
                 <i class="fa fa-location-dot" aria-hidden="true" />
-                <span>{{ item.away_from_uni }} miles away from UF</span>
+                <span>{{ item.distance_from_UF }} miles away from UF</span>
             </p>
             <p class="community-card__info-type">Private | Furnished</p>
             <!-- <p class="community-card__info-learn-more">Learn More</p> -->
@@ -19,14 +19,15 @@
 </template>
 
 <script lang="ts" setup>
-import type { Community } from '~/types';
+import type { Community } from '~/types/communitites';
 
-const props = defineProps({
+defineProps({
     item: {
         type: Object as PropType<Community>,
         required: true,
     }
 });
+
 </script>
 
 <style lang="scss">

@@ -3,13 +3,13 @@
         <h1>Communities</h1>
 
         <div class="communities-list">
-            <CommunityCard v-for="community in communititesData" :key="community.id" :item="community" />
+            <CommunityCard v-for="community in communitiesData.communities" :key="community.id" :item="community" />
         </div>
     </main>
 </template>
 
 <script lang="ts" setup>
-import { communititesData } from '~/types';
+import { communitiesData } from '~/types/communitites';
 
 </script>
 
