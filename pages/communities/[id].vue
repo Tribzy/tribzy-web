@@ -1,5 +1,33 @@
 <template>
     <main class="page-community">
+        <section class="page-community__details-card">
+            <div class="page-community__details-card-head">
+                <CustomButton icon-left="ArrowLeft"></CustomButton>
+
+                <h2>{{ community.name }}</h2>
+
+                <CustomButton class="page-community__join-btn page-community__join-btn--mobile">
+                    Join <span class="hide-text">the Community</span>
+                </CustomButton>
+            </div>
+
+            <div class="page-community__details-card-icons">
+                <CustomIcon icon="Bedroom" :size="44" color="black-2" label="Private Bed, Bath" />
+                <CustomIcon icon="Sofa" :size="44" color="black-2" label="Fully Furnished" />
+                <CustomIcon icon="Wifi" :size="44" color="black-2" label="Free Wifi" />
+                <CustomIcon icon="Parking" :size="44" color="black-2" label="Parking" />
+                <CustomIcon icon="Kitchen" :size="44" color="black-2" label="Kitchen" />
+                <CustomIcon icon="Washer" :size="44" color="black-2" label="Washer" />
+                <CustomIcon icon="Pet" :size="44" color="black-2" label="Pet Friendly" />
+                <CustomIcon icon="More" :size="44" color="black-2" label="More" />
+            </div>
+
+            <div class="page-community__details-card-">
+
+            </div>
+
+        </section>
+
         <section class="page-community__floor-plan">
             <h2>Floor Plan (Recommended)</h2>
             <div class="page-community__floor-plan-list">
@@ -41,7 +69,6 @@ function groupBusesByDestination(): Record<string, string> {
     return busesByDestination;
 }
 
-
 </script>
 
 <style lang="scss">
@@ -63,6 +90,41 @@ function groupBusesByDestination(): Record<string, string> {
     }
 }
 
+.page-community__details-card {
+    background-color: $color-white;
+    padding: 2.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0px 4px 12px 0px #00000014;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    &-head {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            flex: 1;
+            margin-bottom: 0;
+        }
+
+        .custom-button {
+            height: fit-content;
+        }
+    }
+
+    &-icons {
+        display: flex;
+        gap: 1.75rem;
+        flex-wrap: wrap;
+        margin: 1rem 0;
+    }
+}
+
 .page-community__floor-plan-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
@@ -81,7 +143,7 @@ function groupBusesByDestination(): Record<string, string> {
     max-height: 15rem;
     min-height: 15rem;
 
-    min-width: 30rem;
+    min-width: 15rem;
 
     border-radius: 0.5rem;
 
@@ -110,6 +172,29 @@ function groupBusesByDestination(): Record<string, string> {
 
 .page-community__join-btn {
     align-self: center;
-    min-width: 25rem;
+    width: 100%;
+
+    @include min-tablet {
+        width: 25rem;
+    }
+
+    &--mobile {
+        width: 5rem;
+        height: fit-content;
+
+        .hide-text {
+            display: none;
+
+        }
+
+        @include min-tablet {
+            width: fit-content;
+            height: 100%;
+
+            .hide-text {
+                display: inline;
+            }
+        }
+    }
 }
 </style>

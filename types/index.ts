@@ -1,6 +1,6 @@
 export type ButtonType = 'primary' | 'text'
 
-export type IconColorType = 'primary' | 'primary-bg' | 'primary-2' | 'red' | 'green' | 'dark-grey' | 'grey' | 'grey-2' | 'light-grey' | 'black' | 'white';
+export type IconColorType = 'primary' | 'primary-bg' | 'primary-2' | 'red' | 'green' | 'dark-grey' | 'grey' | 'grey-2' | 'light-grey' | 'black' | 'black-2' | 'white';
 
 // export interface Community {
 //     id: number;

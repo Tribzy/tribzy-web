@@ -1,8 +1,12 @@
 <template>
-    <div class="custom-icon" :class="{ 'has-cursor': hasCursor }">
-        <!-- {{ iconColor }} -->
-        <component :is="`Icon${icon}`">
-        </component>
+    <div class="custom-icon-wrapper">
+        <div class="custom-icon" :class="{ 'has-cursor': hasCursor }">
+            <!-- {{ iconColor }} -->
+            <component :is="`Icon${icon}`">
+            </component>
+        </div>
+
+        <p v-if="label">{{ label }}</p>
     </div>
 </template>
 
@@ -34,7 +38,12 @@ const props = defineProps({
         type: Boolean,
         required: false,
         default: false,
-    }
+    },
+    label: {
+        type: String,
+        required: false,
+        default: undefined,
+    },
 });
 
 const iconSize = computed(() => `${props.size / 16}rem`)
@@ -53,6 +62,13 @@ const iconColor = computed(() => {
 @use '@/assets/scss/abstracts/index.scss' as *;
 
 $icon-size: v-bind('iconSize');
+
+.custom-icon-wrapper {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 .custom-icon {
     max-height: $icon-size;
