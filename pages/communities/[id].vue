@@ -22,9 +22,30 @@
                 <CustomIcon icon="More" :size="44" color="black-2" label="More" />
             </div>
 
-            <div class="page-community__details-card-">
+            <div class="page-community__details-card-data">
+                <div class="page-community__details-card-data-image">
+                    <img :src="community.image_url" alt="Community Image" />
+                </div>
 
+                <div class="page-community__details-card-data-details">
+
+                    <p class="page-community__details-card-data-title">Description</p>
+
+                    <p class="page-community__details-card-data-description">
+                        {{ community.description }}
+                    </p>
+
+                    <p class="page-community__details-card-data-title">Community Surroundings</p>
+
+                    <div class="page-community__details-card-data-surroundings">
+                        <p v-for="(item, index) in community.community_surroundings" :key="item">
+                            <span>{{ index }}</span>
+                            <span>{{ item }}</span>
+                        </p>
+                    </div>
+                </div>
             </div>
+
 
         </section>
 
@@ -122,6 +143,52 @@ function groupBusesByDestination(): Record<string, string> {
         gap: 1.75rem;
         flex-wrap: wrap;
         margin: 1rem 0;
+    }
+
+    &-data {
+        display: flex;
+        display: flex;
+        gap: rem(40);
+    }
+
+    &-data-image {
+
+        img {
+            width: rem(440);
+            height: rem(440);
+            border-radius: rem(8);
+        }
+    }
+
+    &-data-title {
+        font-size: rem(20);
+        font-weight: bold;
+        color: black;
+        margin-bottom: 0.75rem;
+    }
+
+    &-data-description {
+        font-size: rem(16);
+        color: $color-grey-2;
+        margin-bottom: 1.5rem;
+    }
+
+    &-data-surroundings {
+        font-size: rem(16);
+        color: $color-grey-2;
+
+        display: flex;
+        flex-direction: column;
+        gap: rem(20);
+
+        p {
+            display: flex;
+            gap: rem(10);
+
+            span:first-child {
+                width: 11rem;
+            }
+        }
     }
 }
 
