@@ -4,8 +4,6 @@
         <section class="page-index__hero">
             <div class="page-index__hero-content">
                 <h1>
-                    <!-- Find Your Tribe
-                    Easily With Tribzy -->
                     Find your Tribe
                     Easily with Tribzy
                 </h1>
@@ -13,6 +11,13 @@
                     Find the perfect place to live and connect with like minded people.
                 </div>
                 <CustomButton @click="scrollToHowItWorks()">Get Started</CustomButton>
+                <div class="page-index__customers-review">
+                    <ProfileCircles />
+                    <div class="page-index__customers-review-rating">
+                        <CustomRating :rating="4.5" />
+                        <div><b>29</b> users already saved their time</div>
+                    </div>
+                </div>
             </div>
             <div class="page-index__hero-image">
                 <img src="@/assets/images/hero-new.webp" alt="Hero Image for Tribzy" />
@@ -85,7 +90,7 @@
 </template>
 
 <script lang="ts" setup>
-import { communititesData, features, howItWorks } from '~/types';
+import { features, howItWorks } from '~/types';
 
 const router = useRouter();
 
@@ -348,6 +353,7 @@ const joinWaitlist = async () => {
         box-shadow: 0px 4px 12px 0px #00000014;
         text-align: left;
         padding: 2rem;
+        background-color: $color-white;
 
         border-radius: $padding;
 
@@ -452,6 +458,33 @@ const joinWaitlist = async () => {
     }
 }
 
+.page-index__customers-review {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    &-rating {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: left;
+
+        .custom-rating .star {
+            font-size: 1rem;
+        }
+
+        @include min-tablet {
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+    }
+
+    @include min-tablet {
+        justify-content: flex-start;
+    }
+}
 
 
 h1 {

@@ -1,29 +1,37 @@
 export type ButtonType = 'primary' | 'text'
 
-export type IconColorType = 'primary' | 'primary-bg' | 'red' | 'green' | 'dark-grey' | 'grey' | 'light-grey' | 'black' | 'white';
+export type IconColorType = 'primary' | 'primary-bg' | 'primary-2' | 'red' | 'green' | 'dark-grey' | 'grey' | 'grey-2' | 'light-grey' | 'black' | 'black-2' | 'white';
 
-export interface Community {
-    id: number;
-    name: string;
-    address: string;
-    image_url: string;
-}
+// export interface Community {
+//     id: number;
+//     name: string;
+//     address: string;
+//     image_url: string;
+//     rating: number;
+//     away_from_uni: number;
+//     university_name: string;
+// }
 
-export const communititesData: Community[] = [
-    {
-        id: 1,
-        name: "BLVD Gainesville",
-        address: "4000 SW 37th Blvd, Gainesville, FL 32608",
-        image_url: "https://lh3.googleusercontent.com/p/AF1QipNs6Do7Tnxo6S30VEotvJ6dHgr9dtg2R8BvpoA=s1360-w1360-h1020"
-    },
-    {
-        id: 2,
-        name: "Stoneridge",
-        address: "3800 SW 34th St, Gainesville, FL 32608",
-        image_url: "https://lh3.googleusercontent.com/p/AF1QipNeZs2kfYj5o7Ks2YbrZe82-dw6YwcV7eWqMZU=s1360-w1360-h1020"
-    },
-]
-
+// export const communititesData: Community[] = [
+//     {
+//         id: 1,
+//         name: "BLVD Gainesville",
+//         address: "4000 SW 37th Blvd, Gainesville, FL 32608",
+//         image_url: "https://lh3.googleusercontent.com/p/AF1QipNs6Do7Tnxo6S30VEotvJ6dHgr9dtg2R8BvpoA=s1360-w1360-h1020",
+//         rating: 4.5,
+//         away_from_uni: 2,
+//         university_name: "UF",
+//     },
+//     {
+//         id: 2,
+//         name: "Stoneridge",
+//         address: "3800 SW 34th St, Gainesville, FL 32608",
+//         image_url: "https://lh3.googleusercontent.com/p/AF1QipNeZs2kfYj5o7Ks2YbrZe82-dw6YwcV7eWqMZU=s1360-w1360-h1020",
+//         rating: 3.5,
+//         away_from_uni: 3.6,
+//         university_name: "UF",
+//     },
+// ]
 
 export interface NavbarItem {
     name: string,

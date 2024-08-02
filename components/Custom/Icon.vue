@@ -1,7 +1,12 @@
 <template>
-    <div class="custom-icon" :class="{ 'has-cursor': hasCursor }">
-        <component :is="`Icon${toTitleCase(icon)}`">
-        </component>
+    <div class="custom-icon-wrapper">
+        <div class="custom-icon" :class="{ 'has-cursor': hasCursor }">
+            <!-- {{ iconColor }} -->
+            <component :is="`Icon${icon}`">
+            </component>
+        </div>
+
+        <p v-if="label">{{ label }}</p>
     </div>
 </template>
 
@@ -33,15 +38,22 @@ const props = defineProps({
         type: Boolean,
         required: false,
         default: false,
-    }
+    },
+    label: {
+        type: String,
+        required: false,
+        default: undefined,
+    },
 });
 
 const iconSize = computed(() => `${props.size / 16}rem`)
 
 const iconColor = computed(() => {
+    console.log("here", `$color-${props.color}`)
     if (props.customColor) return `${props.customColor}`;
 
-    return `$color-${props.color}`;
+    // return `$color-${props.color}`;
+    return `var(--color-${props.color})`;
 })
 
 </script>
@@ -50,6 +62,13 @@ const iconColor = computed(() => {
 @use '@/assets/scss/abstracts/index.scss' as *;
 
 $icon-size: v-bind('iconSize');
+
+.custom-icon-wrapper {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 .custom-icon {
     max-height: $icon-size;
@@ -62,6 +81,7 @@ $icon-size: v-bind('iconSize');
         width: $icon-size;
 
         path {
+            stroke: v-bind('iconColor');
             fill: v-bind('iconColor');
         }
     }
