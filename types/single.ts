@@ -21,6 +21,7 @@ export interface FloorPlan {
 }
 
 export interface BusNumber {
+    id: number;
     route: string;
     destination: string;
 }
@@ -69,12 +70,14 @@ export const community: SingleCommunity = {
     },
     bus_numbers: [
         {
+            id: 1,
             route: "12",
             destination: "to the campus",
         },
         {
+            id: 2,
             route: "37",
             destination: "to the campus",
-        }
+        },
     ]
 };

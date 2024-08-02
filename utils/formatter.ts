@@ -30,3 +30,9 @@ export const getLocalDynamicImageUrl = (rootPath: string, name: string) => {
     return new URL(`/assets/${rootPath}/${name}`, import.meta.url).href
 
 }
+
+export const pluralize = (count: number, singular: string, plural: string) => {
+
+    return count === 1 ? singular : plural;
+
+}

@@ -90,7 +90,7 @@
 </template>
 
 <script lang="ts" setup>
-import { communititesData, features, howItWorks } from '~/types';
+import { features, howItWorks } from '~/types';
 
 const router = useRouter();
 
@@ -353,6 +353,7 @@ const joinWaitlist = async () => {
         box-shadow: 0px 4px 12px 0px #00000014;
         text-align: left;
         padding: 2rem;
+        background-color: $color-white;
 
         border-radius: $padding;
 

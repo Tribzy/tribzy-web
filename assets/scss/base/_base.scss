@@ -31,23 +31,24 @@
     flex-direction: column;
     min-height: 100vh;
     min-width: 100vw;
-    background: linear-gradient(180deg, #fcfcfc -7.78%, #f9f6ff 63.47%, #fcfcfc 99.3%, #eee8fc 124.05%);
+    // background: linear-gradient(180deg, #fcfcfc -7.78%, #f9f6ff 63.47%, #fcfcfc 99.3%, #eee8fc 124.05%);
+    background-color: #F8F5FF; //TODO: Hardcoded
 }
 
 body {
     color: $color-black;
     font-family: "Poppins", sans-serif;
     font-weight: 400;
-    // background-color: #F8F5FF; //TODO: Hardcoded
-    background: linear-gradient(180deg, #fcfcfc -7.78%, #f9f6ff 63.47%, #fcfcfc 99.3%, #eee8fc 124.05%) !important;
+    // background: linear-gradient(180deg, #fcfcfc -7.78%, #f9f6ff 63.47%, #fcfcfc 99.3%, #eee8fc 124.05%) !important;
+    background-color: #F8F5FF; //TODO: Hardcoded
 }
 
 main {
     display: flex;
     flex-direction: column;
     flex: 1;
-    background: linear-gradient(180deg, #fcfcfc -7.78%, #f9f6ff 63.47%, #fcfcfc 99.3%, #eee8fc 124.05%) !important;
-    // background-color: $color-white;
+    // background: linear-gradient(180deg, #fcfcfc -7.78%, #f9f6ff 63.47%, #fcfcfc 99.3%, #eee8fc 124.05%) !important;
+    background-color: #F8F5FF; //TODO: Hardcoded
     padding: 1rem;
 }
 
