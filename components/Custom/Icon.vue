@@ -1,6 +1,7 @@
 <template>
     <div class="custom-icon" :class="{ 'has-cursor': hasCursor }">
-        <component :is="`Icon${toTitleCase(icon)}`">
+        <!-- {{ iconColor }} -->
+        <component :is="`Icon${icon}`">
         </component>
     </div>
 </template>
@@ -39,9 +40,11 @@ const props = defineProps({
 const iconSize = computed(() => `${props.size / 16}rem`)
 
 const iconColor = computed(() => {
+    console.log("here", `$color-${props.color}`)
     if (props.customColor) return `${props.customColor}`;
 
-    return `$color-${props.color}`;
+    // return `$color-${props.color}`;
+    return `var(--color-${props.color})`;
 })
 
 </script>
@@ -62,6 +65,7 @@ $icon-size: v-bind('iconSize');
         width: $icon-size;
 
         path {
+            stroke: v-bind('iconColor');
             fill: v-bind('iconColor');
         }
     }
