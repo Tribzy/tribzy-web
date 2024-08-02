@@ -45,7 +45,7 @@ export default defineNuxtConfig({
     ]
   },
 
-  css: ['~/assets/scss/main.scss'],
+  css: ['~/assets/scss/main.scss', '@fortawesome/fontawesome-free/css/all.css'],
 
   ssr: false,
 
