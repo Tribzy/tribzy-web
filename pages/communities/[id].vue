@@ -1,5 +1,9 @@
 <template>
     <main class="page-community">
+        <h2>Floor Plan</h2>
+        <div class="page-community__floor-plan-list">
+            <FloorPlanCard v-for="plan in community.floor_plans" :key="plan.id" :plan="plan" />
+        </div>
         <h2>Bus Numbers</h2>
         <div class="bus-number-card">
             <CustomIcon icon="BusStop" :size="160" color="primary-2" />
@@ -13,6 +17,8 @@
 </template>
 
 <script lang="ts" setup>
+import { community } from '~/types/single';
+
 </script>
 
 <style lang="scss">
@@ -24,6 +30,12 @@
     @include min-tablet {
         padding: calc($padding-desktop/2) $padding-desktop;
     }
+}
+
+.page-community__floor-plan-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+    gap: 1rem;
 }
 
 .bus-number-card {
