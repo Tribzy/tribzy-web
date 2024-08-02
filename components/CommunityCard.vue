@@ -1,5 +1,5 @@
 <template>
-    <div class="community-card">
+    <nuxt-link class="community-card" :to="`/communities/${item.id}`">
         <div class="community-card__image">
             <img :src="item.image_url" :alt="`Community image of ${item.name}`">
         </div>
@@ -15,7 +15,7 @@
             <!-- <p class="community-card__info-learn-more">Learn More</p> -->
             <CustomRating :rating="item.rating" :size="1" />
         </div>
-    </div>
+    </nuxt-link>
 </template>
 
 <script lang="ts" setup>
@@ -49,6 +49,14 @@ $max-card-info-width: calc($max-card-width - $max-card-image-width);
     border-radius: 0.5rem;
 
     display: flex;
+
+    transition: transform 0.2s ease-in-out;
+
+    &:hover {
+        transform: scale(1.01);
+        box-shadow: 0px 0.5rem 1rem 0px #00000014;
+    }
+
 
     &__image {
         min-width: $max-card-image-width;
@@ -110,10 +118,11 @@ $max-card-info-width: calc($max-card-width - $max-card-image-width);
     }
 }
 
-@include desktop {
+@include min-tablet {
     .community-card {
         flex-direction: column;
-        width: 20rem;
+        min-width: 10rem;
+        // width: 20rem;
         height: fit-content;
         max-width: $max-card-width;
 

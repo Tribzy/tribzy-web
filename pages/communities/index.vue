@@ -33,10 +33,20 @@ import { communitiesData } from '~/types/communitites';
     flex-direction: column;
     gap: 1rem;
 
-    @include min-tablet {
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 1.5rem;
+    @include tablet {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+        // flex-direction: row;
+        // flex-wrap: wrap;
+        // gap: 1.5rem;
+    }
+
+    @include desktop {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+        // flex-direction: row;
+        // flex-wrap: wrap;
+        // gap: 1.5rem;
     }
 }
 </style>
