@@ -109,10 +109,11 @@ const getHowItWorksImageUrl = (url: string) => getLocalDynamicImageUrl("images/h
 const getFeaturesImageUrl = (url: string) => getLocalDynamicImageUrl("images/features", url + '.svg')
 
 const scrollToHowItWorks = () => {
-    const section = document.querySelector("#how-it-works");
-    if (section) {
-        section.scrollIntoView({ behavior: 'smooth' });
-    }
+    navigateTo("https://tribzyco-demo.web.app/", { external: true })
+    //    const section = document.querySelector("#how-it-works");
+    // if (section) {
+    //     section.scrollIntoView({ behavior: 'smooth' });
+    // }
 }
 
 const email = ref<string>("");
