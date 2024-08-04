@@ -65,9 +65,15 @@ export const howItWorks = [
         url: "create",
     },
     {
+        name: "dots",
+    },
+    {
         id: 2,
         name: "Explore Communities",
         url: "explore",
+    },
+    {
+        name: "dots-180-y",
     },
     {
         id: 3,
@@ -81,6 +87,7 @@ export const features = [
         id: 1,
         img_url_path: "community",
         title: "Community Discovery",
+        description: "Explore nearby communities with profiles that include photos, reviews, and amenities. Filter by your preferences to find the ideal match for your university lifestyle.",
         points: [
             "Explore various communities near your university.",
             "Detailed profiles of communities including photos, reviews, and amenities.",
@@ -91,6 +98,7 @@ export const features = [
         id: 2,
         img_url_path: "roommate",
         title: "Roommate Matching",
+        description: "Our algorithms match you with potential roommates based on lifestyle, budget, and habits. Explore profiles to find your best fit and connect easily.",
         points: [
             "Advanced algorithms to match you with potential roommates.",
             "Preferences based on lifestyle, budget, and habits.",
@@ -101,6 +109,7 @@ export const features = [
         id: 3,
         img_url_path: "events",
         title: "Events",
+        description: "Stay updated on community events to engage in gatherings, cultural activities, and meet-ups. Connect with residents and enhance your experience.",
         points: [
             "Stay updated with community events and activities.",
             "Attend social gatherings, cultural events, and meet-ups.",

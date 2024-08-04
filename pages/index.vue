@@ -4,8 +4,8 @@
         <section class="page-index__hero">
             <div class="page-index__hero-content">
                 <h1>
-                    Find your Tribe
-                    Easily with Tribzy
+                    <span>Find your Tribe</span>
+                    <span>Easily with Tribzy</span>
                 </h1>
                 <div class="page-index__hero-content-text">
                     Find the perfect place to live and connect with like minded people.
@@ -31,11 +31,17 @@
             <p>Easily find your Home, Community, and Friends with Tribzy</p>
 
             <div class="page-index__how-it-works-tiles">
-                <div v-for="item in howItWorks" :key="item.id" class="page-index__how-it-works-tile-item">
-                    <div class="page-index__how-it-works-tile-item-img">
-                        <img :src="getHowItWorksImageUrl(item.url)" :alt="item.name" />
-                    </div>
-                    <p class="page-index__how-it-works-tile-item-text">{{ item.name }}</p>
+                <div v-for="(item, index) in howItWorks" :key="item.id" class="page-index__how-it-works-tile-item">
+                    <template v-if="item.url">
+                        <div class="page-index__how-it-works-tile-item-img">
+                            <img :src="getHowItWorksImageUrl(item.url)" :alt="item.name" />
+                        </div>
+                        <p class="page-index__how-it-works-tile-item-text">{{ item.name }}</p>
+                        <p class="page-index__how-it-works-tile-item-index">{{ item.id }}</p>
+                    </template>
+
+                    <img v-else class="page-index__connecting-dots" :class="{ 'z-rotation': index % 2 === 0 }"
+                        src="@/assets/images/how-it-works/connecting-dots.svg" alt="Connecting Dots" />
                 </div>
             </div>
         </section>
@@ -52,9 +58,10 @@
                         <img :src="getFeaturesImageUrl(item.img_url_path)" :alt="item.title" />
                     </div>
                     <p class="title">{{ item.title }}</p>
-                    <ul class="points">
+                    <p class="description">{{ item.description }}</p>
+                    <!--<ul class="points">
                         <li v-for="point in item.points">{{ point }}</li>
-                    </ul>
+                    </ul>-->
                 </div>
             </div>
         </section>
@@ -219,7 +226,12 @@ const joinWaitlist = async () => {
             }
         }
 
-        @include min-tablet {
+        @include tablet {
+            padding-left: calc($padding-desktop / 3);
+            flex-direction: row;
+        }
+
+        @include desktop {
             padding-left: $padding-desktop;
             flex-direction: row;
         }
@@ -239,6 +251,11 @@ const joinWaitlist = async () => {
         @include min-tablet {
             align-items: flex-start;
             flex: 1;
+
+            h1 {
+                display: flex;
+                flex-direction: column;
+            }
         }
     }
 
@@ -267,12 +284,17 @@ const joinWaitlist = async () => {
 
         @include tablet {
             min-width: 20rem;
-            max-width: 40rem;
+            max-width: 25rem;
         }
 
         @include desktop {
             min-width: 20rem;
-            max-width: 50rem;
+            max-width: 30rem;
+        }
+
+        @include large-desktop {
+            min-width: 25rem;
+            max-width: 40rem;
         }
     }
 
@@ -297,7 +319,7 @@ const joinWaitlist = async () => {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        gap: 2rem;
+        gap: 0.75rem;
 
         @include min-tablet {
             flex-direction: row;
@@ -327,6 +349,42 @@ const joinWaitlist = async () => {
             font-size: 1.25rem;
             // font-weight: 500;
             color: $color-black !important;
+            min-width: fit-content;
+        }
+
+        &-index {
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: $color-white;
+            color: $color-primary !important;
+
+            font-size: 1.25rem;
+            font-weight: bold;
+
+            height: 4rem;
+            width: 4rem;
+
+            box-shadow: 0px 4px 16px 0px #0000001F;
+
+            border-radius: 50%;
+        }
+
+        .page-index__connecting-dots {
+            flex-shrink: 1;
+            margin-top: 4rem;
+            flex-basis: 1rem;
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        &:nth-last-child(2) .page-index__connecting-dots {
+            margin-top: 8rem;
+            transform: rotate3d(1, 0, 0, 180deg);
         }
     }
 
@@ -336,11 +394,14 @@ const joinWaitlist = async () => {
 
     &__features-cards {
         margin-top: $padding * 2;
-        display: grid;
-        grid-template-columns: 1fr;
-        column-gap: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: $padding;
 
         @include min-tablet {
+            display: grid;
+            grid-template-columns: 1fr;
+            column-gap: 1rem;
             grid-template-columns: 1fr 1fr 1fr;
         }
     }
@@ -348,8 +409,8 @@ const joinWaitlist = async () => {
     &__features-card-item {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
+        align-items: center;
+        justify-content: center;
         gap: $padding;
         box-shadow: 0px 4px 12px 0px #00000014;
         text-align: left;
@@ -367,6 +428,12 @@ const joinWaitlist = async () => {
             font-size: 1.5rem;
             font-weight: 600;
             color: $color-black;
+        }
+
+        .description {
+            color: $color-dark-grey;
+            text-align: center;
+            font-size: 0.875rem;
         }
 
         .points {
@@ -389,6 +456,11 @@ const joinWaitlist = async () => {
             // img {
             //     color: $color-white;
             // }
+        }
+
+        @include min-tablet {
+            height: 30rem;
+            max-height: 30rem;
         }
     }
 
@@ -536,4 +608,12 @@ $loader-size: 5rem;
         transform: rotate(360deg);
     }
 }
+
+// .page-index__connecting-dots {
+//     margin-top: 5rem;
+
+//     &.z-rotation {
+//         transform: rotate3d(1, 0, 0, 180deg);
+//     }
+// }
 </style>
