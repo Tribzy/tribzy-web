@@ -372,6 +372,7 @@ const joinWaitlist = async () => {
         }
 
         .page-index__connecting-dots {
+            display: none;
             flex-shrink: 1;
             margin-top: 4rem;
             flex-basis: 1rem;
@@ -379,6 +380,10 @@ const joinWaitlist = async () => {
             img {
                 width: 100%;
                 height: 100%;
+            }
+
+            @include min-tablet {
+                display: inline-flex;
             }
         }
 
