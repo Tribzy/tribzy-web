@@ -4,7 +4,7 @@
         <section class="page-index__hero">
             <div class="page-index__hero-content">
                 <h1>
-                    <span>Find your Tribe</span>
+                    <span>Find your Tribe </span>
                     <span>Easily with Tribzy</span>
                 </h1>
                 <div class="page-index__hero-content-text">
