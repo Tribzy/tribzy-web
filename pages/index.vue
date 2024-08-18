@@ -248,6 +248,11 @@ const joinWaitlist = async () => {
             min-width: 12rem;
         }
 
+        h1 {
+            display: flex;
+            flex-direction: column;
+        }
+
         @include min-tablet {
             align-items: flex-start;
             flex: 1;
@@ -260,11 +265,13 @@ const joinWaitlist = async () => {
     }
 
     &__hero-content-text {
-        font-size: 1.5rem;
+        font-size: 0.75rem;
         text-align: center;
         color: $color-dark-grey;
+        width: 80%;
 
         @include min-tablet {
+            font-size: 1.5rem;
             text-align: left;
         }
     }
@@ -334,13 +341,25 @@ const joinWaitlist = async () => {
 
         &-img {
             height: 12rem;
-            max-height: 20rem;
+            max-height: 16rem;
 
             img {
                 height: 100%;
                 width: 100%;
                 object-fit: contain;
                 width: auto;
+            }
+
+            @include desktop {
+                height: 12rem;
+                max-height: 20rem;
+
+                img {
+                    height: 100%;
+                    width: 100%;
+                    object-fit: contain;
+                    width: auto;
+                }
             }
         }
 
@@ -382,7 +401,7 @@ const joinWaitlist = async () => {
                 height: 100%;
             }
 
-            @include min-tablet {
+            @include desktop {
                 display: inline-flex;
             }
         }

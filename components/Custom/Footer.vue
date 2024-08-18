@@ -32,7 +32,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2024 Tribsy. All rights reserved.</p>
+            <p>© 2024 Tribzy. All rights reserved.</p>
             <ul class="footer-links">
                 <li><a href="#">Community Standards</a></li>
                 <li><a href="#">Privacy Policy</a></li>
